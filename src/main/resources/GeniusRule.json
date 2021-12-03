@@ -1,0 +1,1213 @@
+{
+  "ruleMap": {
+    "PreAssessmentPreProcessType": [
+      {
+        "ruleName": "UNAUTHENTICATED_PAYMENT_RULE",
+        "conditions": [
+          {
+            "subConditions": [
+              {
+                "fieldName": "$.payment.application.applicationId",
+                "fieldValue": "TMO,TMOAPP,ESERVICE",
+                "filterOperator": "IN",
+                "logicalOperator": "OR"
+              },
+              {
+                "fieldName": "$.requestHeader.applicationid",
+                "fieldValue": "TMO,TMOAPP,ESERVICE",
+                "filterOperator": "IN"
+              }
+            ],
+            "logicalOperator": "AND"
+          },
+          {
+            "subConditions": [
+              {
+                "fieldName": "$.salesChannelReference.salesChannelId",
+                "fieldValue": "WEB,MWEB",
+                "filterOperator": "IN",
+                "logicalOperator": "OR"
+              },
+              {
+                "fieldName": "$.requestHeader.channelid",
+                "fieldValue": "WEB,MWEB",
+                "filterOperator": "IN"
+              }
+            ],
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.salesContext.operatorId",
+            "fieldValue": "UNAUTHENTICATED",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.orderTypes",
+            "fieldValue": "PAYUPFRONT_ONE_TIME_PAYMENT,DATAPASSPURCHASE,POSTPAYMENT_ONE_TIME_PAYMENT",
+            "filterOperator": "IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.operationType",
+            "fieldValue": "SALES",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.productGroup",
+            "fieldValue": "SoftGoods",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.businessSegment",
+            "fieldValue": "POSTPAID",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.businessUnit",
+            "fieldValue": "TMOBILE",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.billerCode",
+            "fieldValue": "SAMSON",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.programCode",
+            "fieldValue": "U1POSTLEGACY",
+            "filterOperator": "EQUAL"
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.payment.assessment.assessors[0].assessorName",
+            "fieldValue": "CustomerPaymentProfile",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].isAssessmentRequired",
+            "fieldValue": "true",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].additionalInputInfo",
+            "fieldValue": "TXN_BY_CARD_FOR_PERIOD",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].additionalOutputProcessing",
+            "fieldValue": "DECLINE_COUNT"
+          }
+        ]
+      }
+    ],
+    "PreAssessmentPostProcessType": [
+      {
+        "ruleName": "UNAUTHENTICATED_VELOCITY_RULE",
+        "conditions": [
+          {
+            "subConditions": [
+              {
+                "fieldName": "$.payment.application.applicationId",
+                "fieldValue": "TMO,TMOAPP,ESERVICE",
+                "filterOperator": "IN",
+                "logicalOperator": "OR"
+              },
+              {
+                "fieldName": "$.requestHeader.applicationid",
+                "fieldValue": "TMO,TMOAPP,ESERVICE",
+                "filterOperator": "IN"
+              }
+            ],
+            "logicalOperator": "AND"
+          },
+          {
+            "subConditions": [
+              {
+                "fieldName": "$.salesChannelReference.salesChannelId",
+                "fieldValue": "WEB,MWEB",
+                "filterOperator": "IN",
+                "logicalOperator": "OR"
+              },
+              {
+                "fieldName": "$.requestHeader.channelid",
+                "fieldValue": "WEB,MWEB",
+                "filterOperator": "IN"
+              }
+            ],
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.orderTypes",
+            "fieldValue": "PAYUPFRONT_ONE_TIME_PAYMENT,DATAPASSPURCHASE,POSTPAYMENT_ONE_TIME_PAYMENT",
+            "filterOperator": "IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.operationType",
+            "fieldValue": "SALES",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.productGroup",
+            "fieldValue": "SoftGoods",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.businessSegment",
+            "fieldValue": "POSTPAID",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.businessUnit",
+            "fieldValue": "TMOBILE",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.billerCode",
+            "fieldValue": "SAMSON",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.programCode",
+            "fieldValue": "U1POSTLEGACY",
+            "filterOperator": "EQUAL"
+          },
+          {
+            "fieldName": "$.customer.customerPaymentProfile.declineCount",
+            "fieldValue": "2",
+            "filterOperator": "GREATER_THAN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.whitelist",
+            "filterOperator": "IS_NULL"
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.reason.reasonCode",
+            "fieldValue": "4019"
+          },
+          {
+            "fieldName": "$.status.statusCode",
+            "fieldValue": "D"
+          },
+          {
+            "fieldName": "$.payment.assessment.decision",
+            "fieldValue": "REJECT"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].decision",
+            "fieldValue": "REJECT",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.responseCodeList[0].key",
+            "fieldValue": "CustomerPaymentProfile"
+          },
+          {
+            "fieldName": "$.responseCodeList[0].value.errors[0].code",
+            "fieldValue": "4020"
+          },
+          {
+            "fieldName": "$.payment.processing.processors[0].processorName",
+            "fieldValue": "DigitalTransactionManager"
+          },
+          {
+            "fieldName": "$.payment.processing.processors[0].operationName",
+            "fieldValue": "UPSERT"
+          }
+        ]
+      },
+      {
+        "ruleName": "UNAUTHENTICATED_VELOCITY_WHITELIST_OVERRIDE",
+        "conditions": [
+          {
+            "subConditions": [
+              {
+                "fieldName": "$.payment.application.applicationId",
+                "fieldValue": "TMO,TMOAPP,ESERVICE",
+                "filterOperator": "IN",
+                "logicalOperator": "OR"
+              },
+              {
+                "fieldName": "$.requestHeader.applicationid",
+                "fieldValue": "TMO,TMOAPP,ESERVICE",
+                "filterOperator": "IN"
+              }
+            ],
+            "logicalOperator": "AND"
+          },
+          {
+            "subConditions": [
+              {
+                "fieldName": "$.salesChannelReference.salesChannelId",
+                "fieldValue": "WEB,MWEB",
+                "filterOperator": "IN",
+                "logicalOperator": "OR"
+              },
+              {
+                "fieldName": "$.requestHeader.channelid",
+                "fieldValue": "WEB,MWEB",
+                "filterOperator": "IN"
+              }
+            ],
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.orderTypes",
+            "fieldValue": "PAYUPFRONT_ONE_TIME_PAYMENT,DATAPASSPURCHASE,POSTPAYMENT_ONE_TIME_PAYMENT",
+            "filterOperator": "IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.operationType",
+            "fieldValue": "SALES",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.productGroup",
+            "fieldValue": "SoftGoods",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.businessSegment",
+            "fieldValue": "POSTPAID",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.businessUnit",
+            "fieldValue": "TMOBILE",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.billerCode",
+            "fieldValue": "SAMSON",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.programCode",
+            "fieldValue": "U1POSTLEGACY",
+            "filterOperator": "EQUAL"
+          },
+          {
+            "fieldName": "$.customer.customerPaymentProfile.declineCount",
+            "fieldValue": "2",
+            "filterOperator": "GREATER_THAN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.whitelist",
+            "filterOperator": "IS_NOT_NULL"
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.reason.reasonCode",
+            "fieldValue": "4018",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.status.statusCode",
+            "fieldValue": "A",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.decision",
+            "fieldValue": "ACCEPT",
+            "logicalOperator": "AND"
+          }
+        ]
+      },
+      {
+        "ruleName": "DEFAULT_ACCEPT_RULE",
+        "conditions": [
+          {
+            "fieldName": "$.payment.assessment.assessors",
+            "filterOperator": "IS_NULL",
+            "logicalOperator": "OR"
+          },
+          {
+            "inlinePredicates": "$.payment.assessment.assessors[?(@.decision != 'REJECT')]"
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.reason.reasonCode",
+            "fieldValue": "4018",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.status.statusCode",
+            "fieldValue": "A",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.decision",
+            "fieldValue": "ACCEPT",
+            "logicalOperator": "AND"
+          }
+        ]
+      }
+    ],
+    "PostAssessmentPreProcessType": [
+      {
+        "ruleName": "IS_GIFTCARD_DELCINE",
+        "conditions": [
+          {
+            "subConditions": [
+              {
+                "fieldName": "$.payment.application.applicationId",
+                "fieldValue": "DigitalBilling",
+                "filterOperator": "IN",
+                "logicalOperator": "OR"
+              },
+              {
+                "fieldName": "$.requestHeader.applicationid",
+                "fieldValue": "DigitalBilling",
+                "filterOperator": "IN"
+              }
+            ],
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.orderTypes",
+            "fieldValue": "ACTIVATION",
+            "filterOperator": "IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.productGroup",
+            "fieldValue": "HardGoods",
+            "filterOperator": "IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.paymentInstrument.paymentCard.giftCardFlag",
+            "filterOperator": "IS_TRUE"
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.payment.assessment.assessors[0].assessorName",
+            "fieldValue": "PrepaidCard",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].decision",
+            "fieldValue": "REJECT",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].isAssessmentRequired",
+            "fieldValue": "false",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].responseInfo",
+            "fieldValue": "$.payment.paymentInstrument.paymentCard.giftCardFlag"
+          }
+        ]
+      },
+      {
+        "ruleName": "CNP_SALE_AVS_DECLINE",
+        "conditions": [
+          {
+            "fieldName": "$.payment.paymentMethodReference.paymentMethodCode",
+            "fieldValue": "CHECK,CASH,ZELLE,RTCHECK",
+            "filterOperator": "NOT_IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.operationType",
+            "fieldValue": "S,SALES",
+            "filterOperator": "IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.cardPresentIndicator",
+            "filterOperator": "IS_FALSE",
+            "logicalOperator": "AND"
+          },
+          {
+            "subConditions": [
+              {
+                "fieldName": "$.paymentTransactionResponse.avsResponseCode",
+                "filterOperator": "IS_NULL",
+                "logicalOperator": "OR"
+              },
+              {
+                "subConditions": [
+                  {
+                    "fieldName": "$.payment.programCode",
+                    "fieldValue": "U2PRECNP",
+                    "filterOperator": "IN",
+                    "logicalOperator": "AND"
+                  },
+                  {
+                    "fieldName": "$.payment.businessSegment ",
+                    "fieldValue": "PREPAID",
+                    "filterOperator": "IN",
+                    "logicalOperator": "AND"
+                  },
+                  {
+                    "fieldName": "$.payment.productGroup",
+                    "fieldValue": "HardGoods,SoftGoods",
+                    "filterOperator": "IN",
+                    "logicalOperator": "AND"
+                  },
+                  {
+                    "fieldName": "$.paymentTransactionResponse.cvvResponseCode",
+                    "fieldValue": "M",
+                    "filterOperator": "EQUAL",
+                    "logicalOperator": "AND"
+                  },
+                  {
+                    "fieldName": "$.paymentTransactionResponse.avsResponseCode",
+                    "fieldValue": "I5,I6,I7,I8,N1,IE,IC,B8",
+                    "filterOperator": "IN"
+                  }
+                ],
+                "logicalOperator": "OR"
+              },
+              {
+                "subConditions": [
+                  {
+                    "fieldName": "$.paymentTransactionResponse.avsResponseCode",
+                    "fieldValue": "IG, IU, ID",
+                    "filterOperator": "IN",
+                    "logicalOperator": "AND"
+                  },
+                  {
+                    "fieldName": "$.payment.paymentInstrument.paymentCard.bin",
+                    "fieldValue": "454951,487038,511858",
+                    "filterOperator": "NOT_IN"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.payment.assessment.assessors[0].assessorName",
+            "fieldValue": "avsCheck",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].decision",
+            "fieldValue": "REJECT",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].isAssessmentRequired",
+            "fieldValue": "false",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].responseInfo",
+            "fieldValue": "$.paymentTransactionResponse.avsResponseCode"
+          }
+        ]
+      },
+      {
+        "ruleName": "CNP_AUTH_AVS_DECLINE",
+        "conditions": [
+          {
+            "fieldName": "$.payment.paymentMethodReference.paymentMethodCode",
+            "fieldValue": "CHECK,CASH,ZELLE,RTCHECK",
+            "filterOperator": "NOT_IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.operationType",
+            "fieldValue": "AUTH",
+            "filterOperator": "IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.cardPresentIndicator",
+            "filterOperator": "IS_FALSE",
+            "logicalOperator": "AND"
+          },
+          {
+            "subConditions": [
+              {
+                "fieldName": "$.paymentTransactionResponse.avsResponseCode",
+                "filterOperator": "IS_NULL",
+                "logicalOperator": "OR"
+              },
+              {
+                "subConditions": [
+                  {
+                    "fieldName": "$.payment.programCode",
+                    "fieldValue": "U2PRECNP",
+                    "filterOperator": "IN",
+                    "logicalOperator": "AND"
+                  },
+                  {
+                    "fieldName": "$.payment.businessSegment ",
+                    "fieldValue": "PREPAID",
+                    "filterOperator": "IN",
+                    "logicalOperator": "AND"
+                  },
+                  {
+                    "fieldName": "$.payment.productGroup",
+                    "fieldValue": "HardGoods,SoftGoods",
+                    "filterOperator": "IN",
+                    "logicalOperator": "AND"
+                  },
+                  {
+                    "fieldName": "$.paymentTransactionResponse.cvvResponseCode",
+                    "fieldValue": "M",
+                    "filterOperator": "EQUAL",
+                    "logicalOperator": "AND"
+                  },
+                  {
+                    "fieldName": "$.paymentTransactionResponse.avsResponseCode",
+                    "fieldValue": "I5,I6,I7,I8,N1,IE,IC,B8",
+                    "filterOperator": "IN"
+                  }
+                ],
+                "logicalOperator": "OR"
+              },
+              {
+                "subConditions": [
+                  {
+                    "fieldName": "$.paymentTransactionResponse.avsResponseCode",
+                    "fieldValue": "IG,IU,ID,B8,I6,I8,IC",
+                    "filterOperator": "IN"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.payment.assessment.assessors[0].assessorName",
+            "fieldValue": "avsCheck",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].decision",
+            "fieldValue": "REJECT",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].isAssessmentRequired",
+            "fieldValue": "false",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].responseInfo",
+            "fieldValue": "$.paymentTransactionResponse.avsResponseCode"
+          }
+        ]
+      },
+      {
+        "ruleName": "CNP_AUTH_OR_SALE_AVS_CHECK_PASS",
+        "conditions": [
+          {
+            "fieldName": "$.payment.paymentMethodReference.paymentMethodCode",
+            "fieldValue": "CHECK,CASH,ZELLE,RTCHECK",
+            "filterOperator": "NOT_IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.operationType",
+            "fieldValue": "AUTH,S,SALES",
+            "filterOperator": "IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.cardPresentIndicator",
+            "filterOperator": "IS_FALSE"
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.payment.assessment.assessors[0].assessorName",
+            "fieldValue": "avsCheck",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].decision",
+            "fieldValue": "ACCEPT",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].isAssessmentRequired",
+            "fieldValue": "false",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].responseInfo",
+            "fieldValue": "$.paymentTransactionResponse.avsResponseCode"
+          }
+        ],
+        "continueIfRuleMatched": true
+      },
+      {
+        "ruleName": "CNP_SALE_CVV_DECLINE",
+        "conditions": [
+          {
+            "fieldName": "$.payment.paymentMethodReference.paymentMethodCode",
+            "fieldValue": "CHECK,CASH,ZELLE,RTCHECK",
+            "filterOperator": "NOT_IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.operationType",
+            "fieldValue": "S,SALES",
+            "filterOperator": "IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.cardPresentIndicator",
+            "filterOperator": "IS_FALSE",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.terminalEntryMode",
+            "fieldValue": "50",
+            "filterOperator": "NOT_EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "subConditions": [
+              {
+                "subConditions": [
+                  {
+                    "fieldName": "$.paymentTransactionResponse.cvvResponseCode",
+                    "fieldValue": "S,I",
+                    "filterOperator": "IN",
+                    "logicalOperator": "AND"
+                  },
+                  {
+                    "inlinePredicates": "$.payment.specifications[?(@.name == 'cvvCheckRequired' && @.value == 'true')]"
+                  }
+                ],
+                "logicalOperator": "OR"
+              },
+              {
+                "fieldName": "$.paymentTransactionResponse.cvvResponseCode",
+                "fieldValue": "M,P,U,S,I",
+                "filterOperator": "NOT_IN"
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.payment.assessment.assessors[1].assessorName",
+            "fieldValue": "cvvCheck",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[1].decision",
+            "fieldValue": "REJECT",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[1].isAssessmentRequired",
+            "fieldValue": "false",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[1].responseInfo",
+            "fieldValue": "$.paymentTransactionResponse.cvvResponseCode"
+          }
+        ]
+      },
+      {
+        "ruleName": "CNP_AUTH_CVV_DECLINE",
+        "conditions": [
+          {
+            "fieldName": "$.payment.paymentMethodReference.paymentMethodCode",
+            "fieldValue": "CHECK,CASH,ZELLE,RTCHECK",
+            "filterOperator": "NOT_IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.operationType",
+            "fieldValue": "AUTH",
+            "filterOperator": "IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.paymentMethodReference.storePaymentMethodIndicator",
+            "filterOperator": "IS_FALSE",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.cardPresentIndicator",
+            "filterOperator": "IS_FALSE",
+            "logicalOperator": "AND"
+          },
+          {
+            "subConditions": [
+              {
+                "subConditions": [
+                  {
+                    "fieldName": "$.paymentTransactionResponse.cvvResponseCode",
+                    "fieldValue": "S,I",
+                    "filterOperator": "IN",
+                    "logicalOperator": "AND"
+                  },
+                  {
+                    "inlinePredicates": "$.payment.specifications[?(@.name == 'cvvCheckRequired' && @.value == 'true')]"
+                  }
+                ],
+                "logicalOperator": "OR"
+              },
+              {
+                "fieldName": "$.paymentTransactionResponse.cvvResponseCode",
+                "fieldValue": "M,P,U,S,I",
+                "filterOperator": "NOT_IN"
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.payment.assessment.assessors[1].assessorName",
+            "fieldValue": "cvvCheck",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[1].decision",
+            "fieldValue": "REJECT",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[1].isAssessmentRequired",
+            "fieldValue": "false",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[1].responseInfo",
+            "fieldValue": "$.paymentTransactionResponse.cvvResponseCode"
+          }
+        ]
+      },
+      {
+        "ruleName": "CNP_AUTH_OR_SALE_CVV_CHECK_PASS",
+        "conditions": [
+          {
+            "fieldName": "$.payment.paymentMethodReference.paymentMethodCode",
+            "fieldValue": "CHECK,CASH,ZELLE,RTCHECK",
+            "filterOperator": "NOT_IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.operationType",
+            "fieldValue": "AUTH,S,SALES",
+            "filterOperator": "IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.cardPresentIndicator",
+            "filterOperator": "IS_FALSE"
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.payment.assessment.assessors[1].assessorName",
+            "fieldValue": "cvvCheck",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[1].decision",
+            "fieldValue": "ACCEPT",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[1].isAssessmentRequired",
+            "fieldValue": "false",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[1].responseInfo",
+            "fieldValue": "$.paymentTransactionResponse.cvvResponseCode"
+          }
+        ],
+        "continueIfRuleMatched": true
+      },
+      {
+        "ruleName": "FRAUD_CALL_REQUIRED_CHECK",
+        "conditions": [
+          {
+            "fieldName": "$.payment.paymentMethodReference.paymentMethodCode",
+            "fieldValue": "CHECK,CASH,ZELLE,RTCHECK",
+            "filterOperator": "NOT_IN",
+            "logicalOperator": "AND"
+          },
+          {
+            "subConditions": [
+              {
+                "fieldName": "$.payment.application.applicationId",
+                "fieldValue": "DigitalBilling,DASH,METRO,TPAS",
+                "filterOperator": "IN",
+                "logicalOperator": "OR"
+              },
+              {
+                "fieldName": "$.requestHeader.applicationid",
+                "fieldValue": "DigitalBilling,DASH,METRO,TPAS",
+                "filterOperator": "IN"
+              }
+            ],
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.fraudCheckFlag",
+            "filterOperator": "IS_TRUE",
+            "logicalOperator": "AND"
+          },
+          {
+            "subConditions": [
+              {
+                "fieldName": "$.payment.parentPaymentId",
+                "filterOperator": "IS_NULL",
+                "logicalOperator": "OR"
+              },
+              {
+                "subConditions": [
+                  {
+                    "fieldName": "$.salesChannelReference.salesChannelId",
+                    "fieldValue": "$.requestHeader.parentChannelId",
+                    "filterOperator": "NOT_EQUAL",
+                    "logicalOperator": "AND"
+                  },
+                  {
+                    "fieldName": "$.requestHeader.channelid",
+                    "fieldValue": "$.requestHeader.parentChannelId",
+                    "filterOperator": "NOT_EQUAL"
+                  }
+                ],
+                "logicalOperator": "OR"
+              },
+              {
+                "fieldName": "$.payment.decision",
+                "fieldValue": "ACCEPT",
+                "filterOperator": "NOT_EQUAL"
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.payment.assessment.assessors[2].assessorName",
+            "fieldValue": "FraudAssessment",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[2].isAssessmentRequired",
+            "fieldValue": "true"
+          }
+        ]
+      }
+    ],
+    "PostAssessmentPostProcessType": [
+      {
+        "ruleName": "IS_GIFTCARD_DECLINE",
+        "conditions": [
+          {
+            "fieldName": "$.payment.assessment.assessors[0].assessorName",
+            "fieldValue": "PrepaidCard",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].decision",
+            "fieldValue": "REJECT",
+            "filterOperator": "EQUAL"
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.reason.reasonCode",
+            "fieldValue": "4019",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.status.statusCode",
+            "fieldValue": "D",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.decision",
+            "fieldValue": "REJECT",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.responseCodeList[0].key",
+            "fieldValue": "PREPAIDCARD",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.responseCodeList[0].value.errors[0].code",
+            "fieldValue": "3087"
+          }
+        ]
+      },
+      {
+        "ruleName": "IS_AVS_DECLINE",
+        "conditions": [
+          {
+            "fieldName": "$.payment.assessment.assessors[0].assessorName",
+            "fieldValue": "avsCheck",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[0].decision",
+            "fieldValue": "REJECT",
+            "filterOperator": "EQUAL"
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.reason.reasonCode",
+            "fieldValue": "4019",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.status.statusCode",
+            "fieldValue": "D",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.decision",
+            "fieldValue": "REJECT",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.responseCodeList[0].key",
+            "fieldValue": "AVSDECLINE",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.responseCodeList[0].value.errors[0].code",
+            "fieldValue": "8184"
+          }
+        ]
+      },
+      {
+        "ruleName": "IS_CVV_DECLINE",
+        "conditions": [
+          {
+            "fieldName": "$.payment.assessment.assessors[1].assessorName",
+            "fieldValue": "cvvCheck",
+            "filterOperator": "EQUAL",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.assessors[1].decision",
+            "fieldValue": "REJECT",
+            "filterOperator": "EQUAL"
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.reason.reasonCode",
+            "fieldValue": "4019",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.status.statusCode",
+            "fieldValue": "D",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.decision",
+            "fieldValue": "REJECT",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.responseCodeList[0].key",
+            "fieldValue": "VALIDATION",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.responseCodeList[0].value.errors[0].code",
+            "fieldValue": "8183"
+          }
+        ]
+      },
+      {
+        "ruleName": "FRAUD_REJECT",
+        "conditions": [
+          {
+            "inlinePredicates": "$.payment.assessment.assessors[?(@.assessorName == 'FraudAssessment' && @.decision == 'REJECT')]"
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.reason.reasonCode",
+            "fieldValue": "4019",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.status.statusCode",
+            "fieldValue": "D",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.decision",
+            "fieldValue": "REJECT",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.responseCodeList[0].key",
+            "fieldValue": "FRAUDCHECK",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.responseCodeList[0].value.errors[0].code",
+            "fieldValue": "2495"
+          }
+        ]
+      },
+      {
+        "ruleName": "FRAUD_ACCEPT",
+        "conditions": [
+          {
+            "inlinePredicates": "$.payment.assessment.assessors[?(@.assessorName == 'FraudAssessment' && @.decision == 'ACCEPT')]"
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.reason.reasonCode",
+            "fieldValue": "4018",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.status.statusCode",
+            "fieldValue": "A",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.decision",
+            "fieldValue": "ACCEPT"
+          }
+        ]
+      },
+      {
+        "ruleName": "FRAUD_REVIEW_OVERRIDE",
+        "conditions": [
+          {
+            "inlinePredicates": "$.payment.assessment.assessors[?(@.assessorName == 'FraudAssessment' && @.decision == 'REVIEW')]",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.overrideFraudReview",
+            "filterOperator": "IS_TRUE"
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.reason.reasonCode",
+            "fieldValue": "4018",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.status.statusCode",
+            "fieldValue": "A",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.decision",
+            "fieldValue": "ACCEPT",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.decision",
+            "fieldValue": "ACCEPT"
+          }
+        ]
+      },
+      {
+        "ruleName": "FRAUD_REVIEW",
+        "conditions": [
+          {
+            "inlinePredicates": "$.payment.assessment.assessors[?(@.assessorName == 'FraudAssessment' && @.decision == 'REVIEW')]",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.overrideFraudReview",
+            "filterOperator": "IS_FALSE"
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.reason.reasonCode",
+            "fieldValue": "4021",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.status.statusCode",
+            "fieldValue": "A",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.decision",
+            "fieldValue": "REVIEW",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.decision",
+            "fieldValue": "REVIEW"
+          }
+        ]
+      },
+      {
+        "ruleName": "DEFAULT_ACCEPT_RULE",
+        "conditions": [
+          {
+            "fieldName": "$.payment.assessment.assessors",
+            "filterOperator": "IS_NULL",
+            "logicalOperator": "OR"
+          },
+          {
+            "inlinePredicates": "$.payment.assessment.assessors[?(@.decision != 'REJECT')]"
+          }
+        ],
+        "actions": [
+          {
+            "fieldName": "$.reason.reasonCode",
+            "fieldValue": "4018",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.status.statusCode",
+            "fieldValue": "A",
+            "logicalOperator": "AND"
+          },
+          {
+            "fieldName": "$.payment.assessment.decision",
+            "fieldValue": "ACCEPT",
+            "logicalOperator": "AND"
+          }
+        ]
+      }
+    ]
+  }
+}
